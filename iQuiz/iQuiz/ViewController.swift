@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
+    var appData = AppData.shared
     
     
     var subjects = ["Pop Culture", "Sports", "Movies"]
@@ -32,8 +33,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "cellReuseIdentifier", for: indexPath) as! CustomTableViewCell
-        cell.subject.text = self.subjects[indexPath.row]
-        cell.desc.text = self.descriptions[indexPath.row]
+        cell.subject.text = appData.subjects[indexPath.row]
+        cell.desc.text = appData.descriptions[indexPath.row]
         cell.imageView?.image = UIImage(named: self.images[indexPath.row])
         cell.imageView?.contentMode = .scaleAspectFit
         
@@ -43,6 +44,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        appData.topicIndex = indexPath.row
+        performSegue(withIdentifier: "segueGoToQuestion", sender: self)
     }
 
     @IBAction func settingsPressed(_ sender: Any) {
