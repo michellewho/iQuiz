@@ -29,7 +29,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subject" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="18s-qH-Xcl">
-                                                    <rect key="frame" x="154" y="26" width="498" height="27"/>
+                                                    <rect key="frame" x="154" y="26" width="206" height="27"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="27" id="SgW-8N-K5K"/>
                                                     </constraints>
@@ -38,7 +38,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tBl-l0-fgr">
-                                                    <rect key="frame" x="154" y="62" width="498" height="41"/>
+                                                    <rect key="frame" x="154" y="62" width="206" height="41"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.27135143979999998" green="0.27135143979999998" blue="0.27135143979999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -127,7 +127,7 @@
                                 <rect key="frame" x="114" y="581" width="146" height="30"/>
                                 <state key="normal" title="Submit"/>
                                 <connections>
-                                    <segue destination="wTr-eL-IFl" kind="show" identifier="segueToAnswer" id="201-aS-cY9"/>
+                                    <action selector="submitButtonPressed:" destination="LQC-rr-nmF" eventType="touchUpInside" id="ZOa-gI-XYz"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="31" translatesAutoresizingMaskIntoConstraints="NO" id="gxK-Pw-YZO">
@@ -194,6 +194,7 @@
                         <outlet property="question" destination="gbS-iN-uJc" id="PGQ-Jk-wfL"/>
                         <outlet property="submit" destination="kQY-G3-byp" id="t4Q-bP-XTD"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="segueBackHome" id="ASP-EP-rwC"/>
+                        <segue destination="wTr-eL-IFl" kind="show" identifier="segueToAnswer" id="xlk-b1-eHq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IfX-Qg-ZyI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -328,6 +329,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="LVa-yQ-Tef"/>
+        <segue reference="ASP-EP-rwC"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -21,11 +21,6 @@ class QuestionViewController: UIViewController {
     
     var answerSelected = ""
     
-    var numRight = 0
-    
-    var questionCount = 0
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         newQuestion()
@@ -40,7 +35,9 @@ class QuestionViewController: UIViewController {
     
     @objc func swipe(sender: UISwipeGestureRecognizer) {
         if (sender.direction == .right) {
-            performSegue(withIdentifier: "segueToAnswer", sender: self)
+            if (answerSelected != "") {
+                performSegue(withIdentifier: "segueToAnswer", sender: self)
+            }
         } else if (sender.direction == .left) {
             appData.numGuessed = 0
             appData.numRight = 0
@@ -94,48 +91,30 @@ class QuestionViewController: UIViewController {
         a4.setTitleColor(UIColor.black, for: .normal)
     }
     
-    func newQuestion() {
-        let numGuessed = appData.numGuessed
-        switch appData.topicIndex {
-        case 0:
-            question.text = appData.popQuestions[numGuessed]
-            appData.questionText = appData.popQuestions[numGuessed]
-            a1.setTitle(appData.popChoices[numGuessed][0], for: .normal)
-            a2.setTitle(appData.popChoices[numGuessed][1], for: .normal)
-            a3.setTitle(appData.popChoices[numGuessed][2], for: .normal)
-            a4.setTitle(appData.popChoices[numGuessed][3], for: .normal)
-            appData.answerText = appData.popAnswers[numGuessed]
-        case 1:
-            question.text = appData.sportsQuestions[numGuessed]
-            appData.questionText = appData.sportsQuestions[numGuessed]
-            a1.setTitle(appData.sportsChoices[numGuessed][0], for: .normal)
-            a2.setTitle(appData.sportsChoices[numGuessed][1], for: .normal)
-            a3.setTitle(appData.sportsChoices[numGuessed][2], for: .normal)
-            a4.setTitle(appData.sportsChoices[numGuessed][3], for: .normal)
-            appData.answerText = appData.sportsAnswers[numGuessed]
-        default:
-            question.text = appData.moviesQuestions[numGuessed]
-            appData.questionText = appData.moviesQuestions[numGuessed]
-            a1.setTitle(appData.moviesChoices[numGuessed][0], for: .normal)
-            a2.setTitle(appData.moviesChoices[numGuessed][1], for: .normal)
-            a3.setTitle(appData.moviesChoices[numGuessed][2], for: .normal)
-            a4.setTitle(appData.moviesChoices[numGuessed][3], for: .normal)
-            appData.answerText = appData.moviesAnswers[numGuessed]
+    
+    @IBAction func submitButtonPressed(_ sender: Any) {
+        if (answerSelected != "") {
+            performSegue(withIdentifier: "segueToAnswer", sender: self)
         }
     }
     
-    @IBAction func backButtonPressed(_ sender: Any) {
-        performSegue(withIdentifier: "segueBackHome", sender: self)
+    func newQuestion() {
+        let numGuessed = appData.numGuessed
+        question.text = appData.categories[appData.topicIndex].questions[numGuessed].question
+        a1.setTitle(appData.categories[appData.topicIndex].questions[numGuessed].answers[0], for: .normal)
+        a2.setTitle(appData.categories[appData.topicIndex].questions[numGuessed].answers[1], for: .normal)
+        a3.setTitle(appData.categories[appData.topicIndex].questions[numGuessed].answers[2], for: .normal)
+        a4.setTitle(appData.categories[appData.topicIndex].questions[numGuessed].answers[3], for: .normal)
+        
+        let correctAnswer = Int(appData.categories[appData.topicIndex].questions[numGuessed].correctAnswer)! - 1
+        appData.answerText = appData.categories[appData.topicIndex].questions[numGuessed].answers[correctAnswer]
+        appData.questionText = appData.categories[appData.topicIndex].questions[numGuessed].question
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func backButtonPressed(_ sender: Any) {
+        appData.numGuessed = 0
+        appData.numRight = 0
+        performSegue(withIdentifier: "segueBackHome", sender: self)
     }
-    */
 
 }

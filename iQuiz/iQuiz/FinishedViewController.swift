@@ -20,20 +20,19 @@ class FinishedViewController: UIViewController {
         super.viewDidLoad()
         
 //        numRight.text = String(appData.numRight)
+        let totalQuestions = appData.categories[appData.topicIndex].questions.count
         
-        if (appData.numRight == 4) {
+        if (appData.numRight == totalQuestions) {
             reaction.text = "Perfect!"
-        } else if (appData.numRight == 2 || appData.numRight == 3) {
-            reaction.text = "So Close..."
         } else {
             reaction.text = "Better Luck Next Time :("
         }
-        result.text = "You got " + String(appData.numRight) + " out of 4 questions right"
+        result.text = "You got " + String(appData.numRight) + " out of " + String(totalQuestions) + " questions right"
+        
         
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(swipe))
         swipeLeft.direction = .left
         self.view.addGestureRecognizer(swipeLeft)
-    
     }
     
     @objc func swipe(sender: UISwipeGestureRecognizer) {

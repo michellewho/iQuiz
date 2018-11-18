@@ -16,8 +16,6 @@ class AnswerViewController: UIViewController {
     @IBOutlet weak var answer: UILabel!
     @IBOutlet weak var reaction: UILabel!
     
-//    var questionText = "question"
-//    var answerText = "answer"
     
     var correctAnswer = false
     
@@ -63,7 +61,7 @@ class AnswerViewController: UIViewController {
     @IBAction func nextButtonPressed(_ sender: Any) {
         let numGuessed = appData.numGuessed
         print(numGuessed)
-        if (numGuessed < 4) {
+        if (numGuessed < appData.categories[appData.topicIndex].questions.count) {
             let destination = self.storyboard?.instantiateViewController(withIdentifier: "QuestionViewController") as! QuestionViewController
             self.present(destination, animated: true, completion: nil)
         } else {
